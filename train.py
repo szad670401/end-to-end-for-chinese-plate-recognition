@@ -8,7 +8,6 @@ import mxnet as mx
 import numpy as np
 import cv2, random
 from io import BytesIO
-from captcha.image import ImageCaptcha
 from genplate import *
 
 
