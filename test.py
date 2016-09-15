@@ -81,4 +81,4 @@ def TestRecognizeOne(img):
     cv2.waitKey(0)
 
 if __name__ == '__main__':
-    TestRecognizeOne(cv2.imread("./plate/1.jpg"))
+    TestRecognizeOne(cv2.imread("./plate/01.jpg"))
