@@ -124,10 +124,10 @@ def Accuracy(label, pred):
     label = label.T.reshape((-1, ))
     hit = 0
     total = 0
-    for i in range(pred.shape[0] / 4):
+    for i in range(pred.shape[0] / 7):
         ok = True
-        for j in range(4):
-            k = i * 4 + j
+        for j in range(7):
+            k = i * 7 + j
             if np.argmax(pred[k]) != int(label[k]):
                 ok = False
                 break
