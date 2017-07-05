@@ -131,7 +131,7 @@ def random_scene(img, data_set):
     img = cv2.bitwise_or(inv, img)
     env[y:y+new_height, x:x+new_width, :] = img[:,:,:]
 
-    return env, (x,y,img.shape[1], img.shape[0])
+    return env, (x, y, x + img.shape[1], y + img.shape[0])
 
 def GenCh(f,val):
     img=Image.new("RGB", (45,70),(255,255,255))
