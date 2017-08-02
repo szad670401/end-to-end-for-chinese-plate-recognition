@@ -23,7 +23,7 @@ class GenPlate:
 
 
     def draw(self,val):
-        offset= 2 ;
+        offset= 2
 
         self.img[0:70,offset+8:offset+8+23]= GenCh(self.fontC,val[0]);
         self.img[0:70,offset+8+23+6:offset+8+23+6+23]= GenCh1(self.fontE,val[1]);
@@ -37,13 +37,14 @@ class GenPlate:
             fg = cv2.bitwise_not(fg);
             com = cv2.bitwise_or(fg,self.bg);
             # com = rot(com,r(60)-30,com.shape,30);
-            # com = rotRandrom(com,10,(com.shape[1],com.shape[0]));
-            #com = AddSmudginess(com,self.smu)
+            com = rot(com,r(40)-20,com.shape,20);
+            com = rotRandrom(com,10,(com.shape[1],com.shape[0]));
+            com = AddSmudginess(com,self.smu)
 
             # com = tfactor(com)
-            # com = random_envirment(com,self.noplates_path)
-            # com = AddGauss(com, 1+r(4))
-            # com = addNoise(com)
+            com = random_envirment(com,self.noplates_path)
+            com = AddGauss(com, 1+r(2))
+            com = addNoise(com)
             return com
     def genPlateString(self,pos,val):
         plateStr = "";
@@ -64,15 +65,15 @@ class GenPlate:
         return plateStr;
 
     def genBatch(self, batchSize,pos,charRange, outputPath,size):
-        if (not os.path.exists(outputPath)):
+        if not os.path.exists(outputPath):
             os.makedirs(outputPath)
         for i in xrange(batchSize):
             plateStr = self.genPlateString(-1,-1)
-            img =  self.generate(plateStr)
+            img = self.generate(plateStr)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             img = cv2.resize(img,size)
             # filename = os.path.join(outputPath, str(i).zfill(4) + '.' + plateStr + ".jpg")
-            filename = os.path.join(outputPath, str(i).zfill(4) + '_' + plateStr + ".jpg")
+            filename = os.path.join(outputPath, str(i).zfill(5) + '_' + plateStr + ".jpg")
             cv2.imwrite(filename, img)
             print filename, plateStr
 

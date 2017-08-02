@@ -1,5 +1,6 @@
 #coding=utf-8
 import os
+import random
 # import sys
 import numpy as np
 import cv2
@@ -46,36 +47,38 @@ chars = ["京", "沪", "津", "渝", "冀", "晋", "蒙", "辽", "吉", "黑", "
 
 
 def AddSmudginess(img, Smu):
-    rows = r(Smu.shape[0] - 50)
+    img_h, img_w = img.shape[:2]
+    rows = r(Smu.shape[0] - img_h)
 
-    cols = r(Smu.shape[1] - 50)
-    adder = Smu[rows:rows + 50, cols:cols + 50];
-    adder = cv2.resize(adder, (50, 50));
+    cols = r(Smu.shape[1] - img_w)
+    adder = Smu[rows:rows + img_h, cols:cols + img_w];
+    adder = cv2.resize(adder, (img_w, img_h));
+    adder = cv2.bitwise_not(adder)
     #   adder = cv2.bitwise_not(adder)
-    img = cv2.resize(img,(50,50))
-    img = cv2.bitwise_not(img)
-    img = cv2.bitwise_and(adder, img)
-    img = cv2.bitwise_not(img)
+    # img = cv2.resize(img,(50,50))
+    # img = cv2.bitwise_not(img)
+    # img = cv2.bitwise_and(adder, img)
+    # img = cv2.bitwise_not(img)
+    val = random.random() * 0.5
+    img = cv2.addWeighted(img, 1 - val, adder, val, 0.0)
     return img
 
 def rot(img,angel,shape,max_angel):
     """ 使图像轻微的畸变
-
         img 输入图像
         factor 畸变的参数
         size 为图片的目标尺寸
-
     """
     size_o = [shape[1],shape[0]]
-
-    size = (shape[1]+ int(shape[0]*cos((float(max_angel )/180) * 3.14)),shape[0])
-
-
+    # print size_o
+    # size = (shape[1]+ int(shape[0]*cos((float(max_angel )/180) * 3.14)),shape[0])
+    # print size
+    size = (shape[1]+ int(shape[0]*sin((float(max_angel )/180) * 3.14)),shape[0])
+    # print size
     interval = abs( int( sin((float(angel) /180) * 3.14)* shape[0]));
 
-    pts1 = np.float32([[0,0]         ,[0,size_o[1]],[size_o[0],0],[size_o[0],size_o[1]]])
+    pts1 = np.float32([[0,0],[0,size_o[1]],[size_o[0],0],[size_o[0],size_o[1]]])
     if(angel>0):
-
         pts2 = np.float32([[interval,0],[0,size[1]  ],[size[0],0  ],[size[0]-interval,size_o[1]]])
     else:
         pts2 = np.float32([[0,0],[interval,size[1]  ],[size[0]-interval,0  ],[size[0],size_o[1]]])
@@ -114,10 +117,12 @@ def random_envirment(img,data_set):
 
     env = cv2.resize(env,(img.shape[1],img.shape[0]))
 
-    bak = (img==0);
-    bak = bak.astype(np.uint8)*255;
-    inv = cv2.bitwise_and(bak,env)
-    img = cv2.bitwise_or(inv,img)
+    # bak = (img==0);
+    # bak = bak.astype(np.uint8)*255;
+    # inv = cv2.bitwise_and(bak,env)
+    # img = cv2.bitwise_or(inv,img)
+    val = random.random() * 0.4
+    img = cv2.addWeighted(img, 1 - val, env, val, 0.0)
     return img
 
 def random_scene(img, data_set):
