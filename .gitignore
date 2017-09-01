@@ -1,0 +1,7 @@
+.DS_Store
+*.pyc
+.vscode/
+.idea/
+result_scene
+plate_test
+plate_train

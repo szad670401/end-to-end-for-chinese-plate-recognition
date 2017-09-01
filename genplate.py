@@ -197,14 +197,16 @@ class GenPlate:
         if (not os.path.exists(outputPath)):
             os.mkdir(outputPath)
         for i in xrange(batchSize):
-                plateStr = G.genPlateString(-1,-1)
-                img =  G.generate(plateStr);
-                img = cv2.resize(img,size);
-                cv2.imwrite(outputPath + "/" + str(i).zfill(2) + ".jpg", img);
+            plateStr = G.genPlateString(-1,-1)
+            img =  G.generate(plateStr);
+            img = cv2.resize(img,size);
+            filename = os.path.join(outputPath, str(i).zfill(4) + '.' + plateStr + ".jpg")
+            cv2.imwrite(filename, img);
 
 G = GenPlate("./font/platech.ttf",'./font/platechar.ttf',"./NoPlates")
 
-G.genBatch(100,2,range(31,65),"./plate",(272,72))
+# G.genBatch(10000,2,range(31,65),"./plate_train",(272,72))
+G.genBatch(1000,2,range(31,65),"./plate_test",(272,72))
 
 
 
