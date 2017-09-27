@@ -34,4 +34,4 @@ https://github.com/ibyte2011/end-to-end-for-chinese-plate-recognition
  
 ## 关于车牌识别
 另外安利下我业余时间写的车牌识别项目，识别速度和效果都相当可以。欢迎大家commit.
-https://github.com/szad670401/HyperLPR_python
+https://github.com/zeusees/HyperLPR
