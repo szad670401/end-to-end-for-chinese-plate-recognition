@@ -5,6 +5,10 @@
 ## 训练好的模型
 https://github.com/ibyte2011/end-to-end-for-chinese-plate-recognition
 
+## 关于车牌识别
+生成的车牌对于实际车牌并不是效果很好，在结合真实样本和GAN，训练了一个更好的模型，对真实车牌表现很好。
+并实现了一整套车牌识别的系统命名为HyperLPR https://github.com/zeusees/HyperLPR
+
 ## 依赖:
  + Numpy
  + Mxnet
@@ -32,6 +36,4 @@ https://github.com/ibyte2011/end-to-end-for-chinese-plate-recognition
 
 <img src='./recognize_samples/Screen Shot 2016-08-07 at 12.55.45 AM.png' />
  
-## 关于车牌识别
-生成的车牌对于实际车牌并不是效果很好，在结合真实样本和GAN，训练了一个更好的模型，对真实车牌表现很好。
-具体实现可以参考 https://github.com/zeusees/HyperLPR
+
