@@ -37,3 +37,9 @@ https://github.com/ibyte2011/end-to-end-for-chinese-plate-recognition
 <img src='./recognize_samples/Screen Shot 2016-08-07 at 12.55.45 AM.png' />
  
 
+
+## Author
+  + Jack Yu
+  + XiaoXiao
+ + MxnetxIAO
+ + Mxnet
